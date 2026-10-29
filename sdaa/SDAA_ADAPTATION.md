@@ -185,13 +185,12 @@ swig  4.1.1    /usr/bin/swig      (swig-4.1.1-3.lns23.loongarch64)
 g++ / gcc / make
 ```
 
-**源码目录已被容器重建清掉**（`/data/application/xuqiang/openmm-src/` 不存在，
-`/tmp/openmm_build.log` 也没了），要重装得重新拉源码编译。
+**源码目录已被容器重建清掉**（构建源码目录与构建日志均已丢失），要重装得重新拉源码编译。
 
 ### pdbfixer：一条命令
 
 ```bash
-docker exec -u 1007:1007 -e USER=xuqiang -e HOME=/data/application/xuqiang \
+docker exec -u 1007:1007 -e USER=<user> -e HOME=/tmp \
   sdaa bash -c '
     source /opt/tecoai/setvars.sh
     /home/py312/bin/python3 -m pip install pdbfixer==1.12.0
@@ -386,11 +385,11 @@ SDAA 侧 128 核（`nproc` = 128），x86 对照侧 56 核。口径：14 个 cas
 **① 官方测试套件（主验收）**
 
 ```bash
-docker exec -u 1007:1007 -e USER=xuqiang -e HOME=/data/application/xuqiang \
+docker exec -u 1007:1007 -e USER=<user> -e HOME=/tmp \
   sdaa bash -c '
     source /opt/tecoai/setvars.sh
     export PATH=/home/py312/bin:$PATH
-    cd /tmp/pdbfix_probe/pdbfixer-1.12.0
+    cd <pdbfixer-1.12.0 源码目录>
     /home/py312/bin/python3 -m pytest pdbfixer/tests/ -v
   '
 # 预期：23 passed
